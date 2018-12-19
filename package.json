@@ -1,0 +1,12 @@
+{
+  "name": "skulpt-zenobase",
+  "version": "1.0.0",
+  "description": "Tool to generate JSON for Skulp data to import into Zenobase",
+  "main": "index.js",
+  "repository": "git@github.com:tkuminecz/skulpt-zenobase.git",
+  "author": "Tim Kuminecz <tkuminecz@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "inquirer": "^6.2.1"
+  }
+}
