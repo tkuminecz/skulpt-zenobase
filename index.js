@@ -7,17 +7,17 @@ const BODY_PARTS = [
   // Front side
   'Shoulders',
   'Biceps',
-  // 'Forearms',
-  // 'Chest',
-  // 'Abs',
-  // 'Quads',
-  // // Back side
-  // 'Triceps',
-  // 'Upper Back',
-  // 'Lower Back',
-  // 'Glutes',
-  // 'Hamstrings',
-  // 'Calves'
+  'Forearms',
+  'Chest',
+  'Abs',
+  'Quads',
+  // Back side
+  'Triceps',
+  'Upper Back',
+  'Lower Back',
+  'Glutes',
+  'Hamstrings',
+  'Calves'
 ]
 
 function getBodySideTags (part) {
