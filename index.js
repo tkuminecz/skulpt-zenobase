@@ -89,7 +89,7 @@ async function main () {
     data[part] = { mq, fat }
   }
 
-  console.log(inspect(createJson('tkuminecz', timestamp, data), { depth: null }))
+  console.log(inspect(createJson('qijg17hom0', timestamp, data), { depth: null }))
 
   console.log()
   console.log(JSON.stringify(createJson('tkuminecz', timestamp, data)))
