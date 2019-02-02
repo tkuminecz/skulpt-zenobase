@@ -6,14 +6,14 @@ const { inspect } = require('util')
 const BODY_PARTS = [
   // Front side
   'Shoulders',
-  'Biceps',
-  'Forearms',
   'Chest',
+  'Biceps',
   'Abs',
+  'Forearms',
   'Quads',
   // Back side
-  'Triceps',
   'Upper Back',
+  'Triceps',
   'Lower Back',
   'Glutes',
   'Hamstrings',
@@ -22,19 +22,6 @@ const BODY_PARTS = [
 
 function getBodySideTags (part) {
   return [ `L ${part}`, `R ${part}` ]
-}
-
-async function collectBodyPartData (part) {
-  console.log(chalk.bold(part))
-  const answers = await inquirer.prompt([
-    { type: 'input', name: 'mq', message: `Muscle Quality` },
-    { type: 'input', name: 'fat', message: `Fat %` }
-  ])
-  console.log()
-  return {
-    mq: parseFloat(answers.mq),
-    fat: parseFloat(answers.fat)
-  }
 }
 
 function createEvent (author, timestamp, part, data) {
@@ -77,16 +64,32 @@ async function main () {
   ])
   console.log()
 
-  // get MQ and Fat% for each body part
+  // generate tags for both sides of all body parts
   const allBodyParts = BODY_PARTS.map(getBodySideTags)
-    .reduce((all, sides) => {
-      return all.concat(sides)
+    .reduce((all, tags) => {
+      return all.concat(tags)
     }, [])
 
   const data = {}
+
+  // collect muscle quality
   for (const part of allBodyParts) {
-    const { mq, fat } = await collectBodyPartData(part)
-    data[part] = { mq, fat }
+    console.log(chalk.bold(part))
+    const { mq } = await inquirer.prompt([
+      { type: 'input', name: 'mq', message: 'Muscle Quality' }
+    ])
+    data[part] = { mq: parseFloat(mq) }
+    console.log()
+  }
+
+  // collect fat %
+  for (const part of allBodyParts) {
+    console.log(chalk.bold(part))
+    const { fat } = await inquirer.prompt([
+      { type: 'input', name: 'fat', message: 'Fat %' }
+    ])
+    data[part] = { ...data[part], fat: parseFloat(fat) }
+    console.log()
   }
 
   console.log(inspect(createJson('qijg17hom0', timestamp, data), { depth: null }))
